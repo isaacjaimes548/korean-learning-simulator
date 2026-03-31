@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5b7cff">
+  <title>Coreano Cero a Héroe</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Coreano: de cero a héroe</h1>
+    <p>PWA pensada para hispanohablantes. Aprende desde Hangul hasta preparación TOPIK.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Tu plan</h2>
+      <label>Meta:
+        <select id="goal">
+          <option value="topik1">TOPIK I</option>
+          <option value="topik2">TOPIK II</option>
+        </select>
+      </label>
+      <label>Minutos al día:
+        <input id="minutes" type="number" min="15" max="240" step="5" value="45">
+      </label>
+      <button id="makePlan">Generar ruta</button>
+      <div id="plan"></div>
+    </section>
+
+    <section class="card">
+      <h2>Ruta de estudio</h2>
+      <ol>
+        <li><strong>Fase 1:</strong> Hangul y pronunciación base</li>
+        <li><strong>Fase 2:</strong> Vocabulario esencial y partículas</li>
+        <li><strong>Fase 3:</strong> Gramática inicial y comprensión</li>
+        <li><strong>Fase 4:</strong> Lectura y escucha tipo TOPIK I</li>
+        <li><strong>Fase 5:</strong> Escritura, lectura extensa y estrategia TOPIK II</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Flashcards</h2>
+      <div class="flashcard" id="flashcard">
+        <div class="front" id="front">가</div>
+        <div class="back" id="back">ga</div>
+      </div>
+      <div class="row">
+        <button id="flipBtn">Voltear</button>
+        <button id="nextBtn">Siguiente</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Mini quiz</h2>
+      <p id="qText"></p>
+      <div id="answers" class="answers"></div>
+      <p id="quizFeedback"></p>
+      <button id="nextQuiz">Otra pregunta</button>
+    </section>
+
+    <section class="card">
+      <h2>Progreso</h2>
+      <p>Flashcards vistas: <span id="seenCount">0</span></p>
+      <p>Respuestas correctas: <span id="correctCount">0</span></p>
+      <button id="resetProgress">Reiniciar progreso</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
