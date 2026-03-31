@@ -10,65 +10,154 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="hero">
-    <h1>Coreano: de cero a héroe</h1>
-    <p>PWA pensada para hispanohablantes. Aprende desde Hangul hasta preparación TOPIK.</p>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">PWA para hispanohablantes</p>
+      <h1>Coreano: de cero a héroe</h1>
+      <p class="sub">Aprende paso a paso desde Hangul hasta TOPIK sin perderte.</p>
+    </div>
   </header>
 
-  <main class="wrap">
-    <section class="card">
-      <h2>Tu plan</h2>
-      <label>Meta:
-        <select id="goal">
-          <option value="topik1">TOPIK I</option>
-          <option value="topik2">TOPIK II</option>
-        </select>
-      </label>
-      <label>Minutos al día:
-        <input id="minutes" type="number" min="15" max="240" step="5" value="45">
-      </label>
-      <button id="makePlan">Generar ruta</button>
-      <div id="plan"></div>
-    </section>
-
-    <section class="card">
-      <h2>Ruta de estudio</h2>
-      <ol>
-        <li><strong>Fase 1:</strong> Hangul y pronunciación base</li>
-        <li><strong>Fase 2:</strong> Vocabulario esencial y partículas</li>
-        <li><strong>Fase 3:</strong> Gramática inicial y comprensión</li>
-        <li><strong>Fase 4:</strong> Lectura y escucha tipo TOPIK I</li>
-        <li><strong>Fase 5:</strong> Escritura, lectura extensa y estrategia TOPIK II</li>
-      </ol>
-    </section>
-
-    <section class="card">
-      <h2>Flashcards</h2>
-      <div class="flashcard" id="flashcard">
-        <div class="front" id="front">가</div>
-        <div class="back" id="back">ga</div>
+  <main class="app-shell">
+    <section id="screen-home" class="screen active">
+      <div class="card welcome-card">
+        <span class="chip">Empieza aquí</span>
+        <h2>Tu ruta personal</h2>
+        <p class="muted">Primero eliges tu meta. Luego la app te dice qué estudiar hoy.</p>
+        <div class="form-grid">
+          <label>
+            <span>¿A qué examen quieres llegar?</span>
+            <select id="goal">
+              <option value="topik1">TOPIK I · principiante</option>
+              <option value="topik2">TOPIK II · intermedio/avanzado</option>
+            </select>
+          </label>
+          <label>
+            <span>¿Cuántos minutos puedes estudiar al día?</span>
+            <input id="minutes" type="number" min="15" max="240" step="5" value="45">
+          </label>
+        </div>
+        <button id="makePlan" class="primary-btn">Crear mi plan</button>
       </div>
-      <div class="row">
-        <button id="flipBtn">Voltear</button>
-        <button id="nextBtn">Siguiente</button>
+
+      <div class="grid two-col">
+        <article class="card">
+          <h3>Qué harás hoy</h3>
+          <div id="todayPlan" class="plan-box">
+            <p><strong>Paso 1:</strong> Crea tu plan.</p>
+            <p><strong>Paso 2:</strong> Ve a <em>Estudiar</em> para ver tu lección.</p>
+            <p><strong>Paso 3:</strong> Ve a <em>Practicar</em> para reforzar.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Tu meta en simple</h3>
+          <div id="goalSummary" class="simple-list">
+            <p><strong>TOPIK I:</strong> lectura + escucha.</p>
+            <p><strong>TOPIK II:</strong> lectura + escucha + escritura.</p>
+            <p class="muted">La app adapta la ruta según tu tiempo diario.</p>
+          </div>
+        </article>
+      </div>
+
+      <article class="card">
+        <h3>Ruta completa</h3>
+        <div class="roadmap">
+          <div class="step"><strong>1.</strong> Hangul y sonidos</div>
+          <div class="step"><strong>2.</strong> Vocabulario básico</div>
+          <div class="step"><strong>3.</strong> Gramática inicial</div>
+          <div class="step"><strong>4.</strong> Lectura y escucha</div>
+          <div class="step"><strong>5.</strong> Simulacros TOPIK</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="screen-study" class="screen">
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow small">Estudiar</p>
+            <h2>Lección de hoy</h2>
+          </div>
+          <span id="lessonBadge" class="chip soft">Fase 1</span>
+        </div>
+        <div id="lessonContent" class="lesson-box"></div>
+      </article>
+
+      <div class="grid two-col">
+        <article class="card">
+          <h3>Flashcard</h3>
+          <p class="muted">Toca “Mostrar respuesta” y luego “Siguiente”.</p>
+          <div class="flashcard" id="flashcard">
+            <div class="flashcard-label" id="cardMode">Pregunta</div>
+            <div class="flashcard-main" id="front">가</div>
+            <div class="flashcard-sub" id="backHint">¿Cómo se lee esto?</div>
+          </div>
+          <div class="row">
+            <button id="flipBtn" class="secondary-btn">Mostrar respuesta</button>
+            <button id="nextBtn" class="primary-btn">Siguiente</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Consejo rápido</h3>
+          <div id="studyTip" class="tip-box"></div>
+        </article>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Mini quiz</h2>
-      <p id="qText"></p>
-      <div id="answers" class="answers"></div>
-      <p id="quizFeedback"></p>
-      <button id="nextQuiz">Otra pregunta</button>
+    <section id="screen-practice" class="screen">
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow small">Practicar</p>
+            <h2>Mini quiz</h2>
+          </div>
+          <span class="chip soft">1 pregunta a la vez</span>
+        </div>
+        <p id="qText" class="question"></p>
+        <div id="answers" class="answers"></div>
+        <p id="quizFeedback" class="feedback"></p>
+        <button id="nextQuiz" class="primary-btn">Siguiente pregunta</button>
+      </article>
+
+      <article class="card">
+        <h3>Cómo usar esta parte</h3>
+        <div class="simple-list">
+          <p>1. Lee la pregunta con calma.</p>
+          <p>2. Elige una opción.</p>
+          <p>3. Revisa la corrección.</p>
+          <p>4. Sigue con la siguiente.</p>
+        </div>
+      </article>
     </section>
 
-    <section class="card">
-      <h2>Progreso</h2>
-      <p>Flashcards vistas: <span id="seenCount">0</span></p>
-      <p>Respuestas correctas: <span id="correctCount">0</span></p>
-      <button id="resetProgress">Reiniciar progreso</button>
+    <section id="screen-progress" class="screen">
+      <div class="grid two-col">
+        <article class="card stat-card">
+          <h3>Flashcards vistas</h3>
+          <div class="stat" id="seenCount">0</div>
+        </article>
+        <article class="card stat-card">
+          <h3>Respuestas correctas</h3>
+          <div class="stat" id="correctCount">0</div>
+        </article>
+      </div>
+
+      <article class="card">
+        <h3>Resumen</h3>
+        <div id="progressSummary" class="simple-list"></div>
+        <button id="resetProgress" class="secondary-btn danger">Reiniciar progreso</button>
+      </article>
     </section>
   </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home">Inicio</button>
+    <button class="nav-btn" data-screen="study">Estudiar</button>
+    <button class="nav-btn" data-screen="practice">Practicar</button>
+    <button class="nav-btn" data-screen="progress">Progreso</button>
+  </nav>
 
   <script src="app.js"></script>
 </body>
